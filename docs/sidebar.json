@@ -2,6 +2,13 @@
   "mlg_lib": {
     "Overview": "/",
     "nbdev_test": "/core",
-    "Title": "/hyperparameter_tuning_utils"
+    "functional": "/functional_programming",
+    "itertools": "/iterators",
+    "numeric": "/numeric_python_utils",
+    "imgproc": "/image_processing",
+    "imfeat": "/image_features",
+    "ml_utils": "/machine_learning_utils",
+    "Title": "/deep_learning_utils",
+    "hptune": "/hyperparameter_tuning_utils"
   }
 }

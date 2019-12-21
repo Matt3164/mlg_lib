@@ -13,7 +13,28 @@ entries:
       title: nbdev_test
       url: /core
     - output: web,pdf
+      title: functional
+      url: /functional_programming
+    - output: web,pdf
+      title: itertools
+      url: /iterators
+    - output: web,pdf
+      title: numeric
+      url: /numeric_python_utils
+    - output: web,pdf
+      title: imgproc
+      url: /image_processing
+    - output: web,pdf
+      title: imfeat
+      url: /image_features
+    - output: web,pdf
+      title: ml_utils
+      url: /machine_learning_utils
+    - output: web,pdf
       title: Title
+      url: /deep_learning_utils
+    - output: web,pdf
+      title: hptune
       url: /hyperparameter_tuning_utils
     output: web
     title: mlg_lib
