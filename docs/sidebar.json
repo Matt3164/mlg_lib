@@ -2,6 +2,6 @@
   "mlg_lib": {
     "Overview": "/",
     "nbdev_test": "/core",
-    "Title": "/unique"
+    "Title": "/hyperparameter_tuning_utils"
   }
 }
