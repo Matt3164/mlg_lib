@@ -8,7 +8,11 @@
     "imgproc": "/image_processing",
     "imfeat": "/image_features",
     "ml_utils": "/machine_learning_utils",
-    "Title": "/deep_learning_utils",
-    "hptune": "/hyperparameter_tuning_utils"
+    "Title": "/multiboosting",
+    "hptune": "/hyperparameter_tuning_utils",
+    "sk_utils": "/sk_utils",
+    "fashion_bench": "/fashion_bench",
+    "data_generation": "/data_generation",
+    "patches": "/patches"
   }
 }

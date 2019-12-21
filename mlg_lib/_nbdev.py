@@ -2,9 +2,15 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb"}
+index = {"say_hello": "00_core.ipynb",
+         "ImageFormat": "04_image_processing.ipynb",
+         "load_img": "04_image_processing.ipynb",
+         "save_img": "04_image_processing.ipynb",
+         "LambdaRow": "10_sk_utils.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "imgproc.py",
+           "sk_utils.py"]
 
 git_url = "https://github.com/Matt3164/mlg_lib/tree/master/"
 

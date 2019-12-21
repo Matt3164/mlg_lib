@@ -32,10 +32,22 @@ entries:
       url: /machine_learning_utils
     - output: web,pdf
       title: Title
-      url: /deep_learning_utils
+      url: /multiboosting
     - output: web,pdf
       title: hptune
       url: /hyperparameter_tuning_utils
+    - output: web,pdf
+      title: sk_utils
+      url: /sk_utils
+    - output: web,pdf
+      title: fashion_bench
+      url: /fashion_bench
+    - output: web,pdf
+      title: data_generation
+      url: /data_generation
+    - output: web,pdf
+      title: patches
+      url: /patches
     output: web
     title: mlg_lib
   output: web
