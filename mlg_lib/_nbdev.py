@@ -6,10 +6,12 @@ index = {"say_hello": "00_core.ipynb",
          "ImageFormat": "04_image_processing.ipynb",
          "load_img": "04_image_processing.ipynb",
          "save_img": "04_image_processing.ipynb",
+         "HogFactory": "05_image_features.ipynb",
          "LambdaRow": "10_sk_utils.ipynb"}
 
 modules = ["core.py",
            "imgproc.py",
+           "imgfeat.py",
            "sk_utils.py"]
 
 git_url = "https://github.com/Matt3164/mlg_lib/tree/master/"
