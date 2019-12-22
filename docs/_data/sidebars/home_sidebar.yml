@@ -13,41 +13,50 @@ entries:
       title: nbdev_test
       url: /core
     - output: web,pdf
-      title: functional
-      url: /functional_programming
+      title: Functionnal programming tutorial
+      url: /tutorial.funcprog
     - output: web,pdf
-      title: itertools
-      url: /iterators
+      title: itertools tutorial
+      url: /tutorial.itertools
     - output: web,pdf
-      title: numeric
-      url: /numeric_python_utils
+      title: Tips and tricks for numerical processing in Python
+      url: /tutorial_numericpython
     - output: web,pdf
-      title: imgproc
-      url: /image_processing
+      title: Basic python image processing tutorial
+      url: /tutorial.imageprocessing
     - output: web,pdf
-      title: imfeat
-      url: /image_features
+      title: Image feature computation tutorial
+      url: /tutorial.imagefeatures
     - output: web,pdf
-      title: ml_utils
-      url: /machine_learning_utils
+      title: Advanced sklearn tutorial
+      url: /tutorial.sklearn
     - output: web,pdf
       title: Title
-      url: /multiboosting
+      url: /application.icote_on_fmnist
     - output: web,pdf
       title: hptune
-      url: /hyperparameter_tuning_utils
+      url: /tutorial.hyperparameter_tuning
     - output: web,pdf
-      title: sk_utils
-      url: /sk_utils
+      title: ml_utils
+      url: /ml_utils
     - output: web,pdf
-      title: fashion_bench
-      url: /fashion_bench
+      title: Benchmark image features on Fashion MNIST
+      url: /application.fashion_benchmark
     - output: web,pdf
       title: data_generation
       url: /data_generation
     - output: web,pdf
       title: patches
       url: /patches
+    - output: web,pdf
+      title: imgproc
+      url: /imgproc
+    - output: web,pdf
+      title: imfeat
+      url: /imfeat
+    - output: web,pdf
+      title: Tutorial on mlflow
+      url: /tutorial.mlflow
     output: web
     title: mlg_lib
   output: web

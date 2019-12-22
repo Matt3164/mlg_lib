@@ -2,17 +2,20 @@
   "mlg_lib": {
     "Overview": "/",
     "nbdev_test": "/core",
-    "functional": "/functional_programming",
-    "itertools": "/iterators",
-    "numeric": "/numeric_python_utils",
-    "imgproc": "/image_processing",
-    "imfeat": "/image_features",
-    "ml_utils": "/machine_learning_utils",
-    "Title": "/multiboosting",
-    "hptune": "/hyperparameter_tuning_utils",
-    "sk_utils": "/sk_utils",
-    "fashion_bench": "/fashion_bench",
+    "Functionnal programming tutorial": "/tutorial.funcprog",
+    "itertools tutorial": "/tutorial.itertools",
+    "Tips and tricks for numerical processing in Python": "/tutorial_numericpython",
+    "Basic python image processing tutorial": "/tutorial.imageprocessing",
+    "Image feature computation tutorial": "/tutorial.imagefeatures",
+    "Advanced sklearn tutorial": "/tutorial.sklearn",
+    "Title": "/application.icote_on_fmnist",
+    "hptune": "/tutorial.hyperparameter_tuning",
+    "ml_utils": "/ml_utils",
+    "Benchmark image features on Fashion MNIST": "/application.fashion_benchmark",
     "data_generation": "/data_generation",
-    "patches": "/patches"
+    "patches": "/patches",
+    "imgproc": "/imgproc",
+    "imfeat": "/imfeat",
+    "Tutorial on mlflow": "/tutorial.mlflow"
   }
 }

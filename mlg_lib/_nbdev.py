@@ -3,16 +3,16 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"say_hello": "00_core.ipynb",
-         "ImageFormat": "04_image_processing.ipynb",
-         "load_img": "04_image_processing.ipynb",
-         "save_img": "04_image_processing.ipynb",
-         "HogFactory": "05_image_features.ipynb",
-         "LambdaRow": "10_sk_utils.ipynb"}
+         "LambdaRow": "10_ml_utils.ipynb",
+         "ImageFormat": "17_imgproc.ipynb",
+         "load_img": "17_imgproc.ipynb",
+         "save_img": "17_imgproc.ipynb",
+         "HogFactory": "18_imfeat.ipynb"}
 
 modules = ["core.py",
+           "ml_utils.py",
            "imgproc.py",
-           "imgfeat.py",
-           "sk_utils.py"]
+           "imgfeat.py"]
 
 git_url = "https://github.com/Matt3164/mlg_lib/tree/master/"
 
