@@ -4,10 +4,16 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"say_hello": "00_core.ipynb",
          "LambdaRow": "10_ml_utils.ipynb",
+         "TrainingOutput": "10_ml_utils.ipynb",
+         "sk_train": "10_ml_utils.ipynb",
+         "make_single_feature_model": "10_ml_utils.ipynb",
          "ImageFormat": "17_imgproc.ipynb",
          "load_img": "17_imgproc.ipynb",
          "save_img": "17_imgproc.ipynb",
-         "HogFactory": "18_imfeat.ipynb"}
+         "HogFactory": "18_imfeat.ipynb",
+         "DaisyFactory": "18_imfeat.ipynb",
+         "flatten": "18_imfeat.ipynb",
+         "LBPFactory": "18_imfeat.ipynb"}
 
 modules = ["core.py",
            "ml_utils.py",

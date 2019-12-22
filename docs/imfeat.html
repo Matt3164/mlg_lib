@@ -33,7 +33,7 @@ summary: "Utilities for computing image features."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="HogFactory" class="doc_header"><code>class</code> <code>HogFactory</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L12" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>HogFactory</code>(<strong><code>orientations</code></strong>:<code>int</code>=<em><code>8</code></em>, <strong><code>pixels_per_cell</code></strong>:<code>Tuple</code>[<code>int</code>, <code>int</code>]=<em><code>(8, 8)</code></em>, <strong><code>cells_per_block</code></strong>:<code>Tuple</code>[<code>int</code>, <code>int</code>]=<em><code>(1, 1)</code></em>, <strong><code>multichannel</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h2 id="HogFactory" class="doc_header"><code>class</code> <code>HogFactory</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L13" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>HogFactory</code>(<strong><code>orientations</code></strong>:<code>int</code>=<em><code>8</code></em>, <strong><code>pixels_per_cell</code></strong>:<code>Tuple</code>[<code>int</code>, <code>int</code>]=<em><code>(8, 8)</code></em>, <strong><code>cells_per_block</code></strong>:<code>Tuple</code>[<code>int</code>, <code>int</code>]=<em><code>(1, 1)</code></em>, <strong><code>multichannel</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -49,7 +49,9 @@ summary: "Utilities for computing image features."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">HogFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pixels_per_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span><span class="n">cells_per_block</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">HogFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pixels_per_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span><span class="n">cells_per_block</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -62,7 +64,139 @@ summary: "Utilities for computing image features."
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(512,)
+<pre>(128,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="DaisyFactory" class="doc_header"><code>class</code> <code>DaisyFactory</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L39" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DaisyFactory</code>(<strong><code>step</code></strong>:<code>int</code>=<em><code>8</code></em>, <strong><code>radius</code></strong>:<code>int</code>=<em><code>8</code></em>, <strong><code>rings</code></strong>:<code>int</code>=<em><code>2</code></em>, <strong><code>histograms</code></strong>:<code>int</code>=<em><code>6</code></em>, <strong><code>orientations</code></strong>:<code>int</code>=<em><code>8</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">DaisyFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">rings</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(416,)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/matthieu/anaconda2/envs/pypurr/lib/python3.7/site-packages/skimage/util/dtype.py:135: UserWarning: Possible precision loss when converting from int64 to float64
+  .format(dtypeobj_in, dtypeobj_out))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="flatten" class="doc_header"><code>flatten</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>flatten</code>(<strong><code>arr</code></strong>:<code>ndarray</code>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="LBPFactory" class="doc_header"><code>class</code> <code>LBPFactory</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L66" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LBPFactory</code>(<strong><code>radius</code></strong>:<code>int</code>=<em><code>8</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">LBPFactory</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">)(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(1024,)
 </pre>
 </div>
 </div>

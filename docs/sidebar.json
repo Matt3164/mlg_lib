@@ -8,7 +8,7 @@
     "Basic python image processing tutorial": "/tutorial.imageprocessing",
     "Image feature computation tutorial": "/tutorial.imagefeatures",
     "Advanced sklearn tutorial": "/tutorial.sklearn",
-    "Title": "/application.icote_on_fmnist",
+    "Title": "/application.multiboosting_on_fmnist",
     "hptune": "/tutorial.hyperparameter_tuning",
     "ml_utils": "/ml_utils",
     "Benchmark image features on Fashion MNIST": "/application.fashion_benchmark",
@@ -16,6 +16,7 @@
     "patches": "/patches",
     "imgproc": "/imgproc",
     "imfeat": "/imfeat",
-    "Tutorial on mlflow": "/tutorial.mlflow"
+    "Tutorial on mlflow": "/tutorial.mlflow",
+    "How to train a COITE ensemble on FMNIST": "/application.icote_on_fmnist"
   }
 }

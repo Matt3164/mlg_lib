@@ -32,7 +32,7 @@ entries:
       url: /tutorial.sklearn
     - output: web,pdf
       title: Title
-      url: /application.icote_on_fmnist
+      url: /application.multiboosting_on_fmnist
     - output: web,pdf
       title: hptune
       url: /tutorial.hyperparameter_tuning
@@ -57,6 +57,9 @@ entries:
     - output: web,pdf
       title: Tutorial on mlflow
       url: /tutorial.mlflow
+    - output: web,pdf
+      title: How to train a COITE ensemble on FMNIST
+      url: /application.icote_on_fmnist
     output: web
     title: mlg_lib
   output: web
