@@ -16,9 +16,9 @@
     "How to train a COITE ensemble on FMNIST": "/application.coite_on_fmnist",
     "How to train a patch based ML model on FMNIST": "/application.patch_trs_on_fmnist"
   },
-  "ml_utils": "/ml_utils",
+  "Utilities": {"ml_utils": "/ml_utils",
   "data_generation": "/data_generation",
   "patches": "/patches",
   "imgproc": "/imgproc",
-  "imfeat": "/imfeat"
+  "imfeat": "/imfeat"}
 }

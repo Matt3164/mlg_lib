@@ -53,20 +53,23 @@ entries:
       url: /application.patch_trs_on_fmnist
     output: web
     title: Applications
-  - output: web,pdf
-    title: ml_utils
-    url: /ml_utils
-  - output: web,pdf
-    title: data_generation
-    url: /data_generation
-  - output: web,pdf
-    title: patches
-    url: /patches
-  - output: web,pdf
-    title: imgproc
-    url: /imgproc
-  - output: web,pdf
-    title: imfeat
-    url: /imfeat
+  - folderitems:
+    - output: web,pdf
+      title: ml_utils
+      url: /ml_utils
+    - output: web,pdf
+      title: data_generation
+      url: /data_generation
+    - output: web,pdf
+      title: patches
+      url: /patches
+    - output: web,pdf
+      title: imgproc
+      url: /imgproc
+    - output: web,pdf
+      title: imfeat
+      url: /imfeat
+    output: web
+    title: Utilities
   output: web
   title: Sidebar
