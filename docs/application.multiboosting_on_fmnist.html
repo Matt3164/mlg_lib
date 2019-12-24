@@ -1,10 +1,10 @@
 ---
 
-title: Title
+title: Multiboosting
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "How to train a multiboosting model"
 ---
 <!--
 
@@ -19,6 +19,411 @@ summary: "summary"
 <div class="container" id="notebook-container">
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">fetch_openml</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">fetch_openml</span><span class="p">(</span><span class="s2">&quot;Fashion-MNIST&quot;</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="s2">&quot;/home/matthieu/sklearn_data&quot;</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="n">xtrain</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 23.5 s, sys: 1.36 s, total: 24.9 s
+Wall time: 24.7 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span> <span class="nn">mlg_lib.imgfeat</span> <span class="k">import</span> <span class="n">HogFactory</span>
+<span class="kn">from</span> <span class="nn">mlg_lib.ml_utils</span> <span class="k">import</span> <span class="n">make_single_feature_model</span><span class="p">,</span> <span class="n">sk_train</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_single_feature_model</span><span class="p">(</span>
+    <span class="n">HogFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pixels_per_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">cells_per_block</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s2">&quot;log2&quot;</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">sk_train</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">cm</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 2min 18s, sys: 487 ms, total: 2min 18s
+Wall time: 2min 19s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TrainingOutput(model=Pipeline(memory=None,
+         steps=[(&#39;lambdarow&#39;,
+                 LambdaRow(row_func=HogFactory(orientations=8, pixels_per_cell=(4, 4), cells_per_block=(1, 1), multichannel=False))),
+                (&#39;gradientboostingclassifier&#39;,
+                 GradientBoostingClassifier(criterion=&#39;friedman_mse&#39;, init=None,
+                                            learning_rate=0.1, loss=&#39;deviance&#39;,
+                                            max_depth=2, max_features=&#39;log2&#39;,
+                                            max_leaf_nodes=None,
+                                            min_impurity_decrease=0.0,
+                                            min_impurity_split=None,
+                                            min_samples_leaf=1,
+                                            min_samples_split=2,
+                                            min_weight_fraction_leaf=0.0,
+                                            n_estimators=50,
+                                            n_iter_no_change=None,
+                                            presort=&#39;auto&#39;, random_state=None,
+                                            subsample=0.1, tol=0.0001,
+                                            validation_fraction=0.1, verbose=0,
+                                            warm_start=False))],
+         verbose=False), metrics={&#39;train_cm&#39;: array([[4593,   33,  163,  643,   44,    1,  436,    0,  106,    0],
+       [   5, 5570,   24,  237,   68,    0,   50,    0,   10,    0],
+       [  53,    5, 4324,   73,  877,    0,  537,    0,   86,    0],
+       [ 105,  129,   36, 5192,  227,    0,  280,    0,   19,    0],
+       [  11,    5,  727,  483, 4231,    0,  515,    0,   56,    0],
+       [   1,    3,    1,   20,    0, 5213,   15,  494,   39,  221],
+       [ 989,   16,  630,  421,  727,    0, 3062,    1,  163,    0],
+       [   0,    0,    0,    0,    0,  271,    0, 5219,    6,  507],
+       [  28,    5,   20,  169,   61,  101,   68,   10, 5539,    3],
+       [   0,    5,    1,   24,    9,  135,    3,  381,    7, 5458]]), &#39;train_acc&#39;: 0.8066833333333333, &#39;test_cm&#39;: array([[726,   9,  27, 124,  11,   0,  66,   0,  18,   0],
+       [  4, 959,   2,  50,  10,   0,  10,   0,   1,   0],
+       [ 16,   1, 746,  12, 162,   0,  93,   0,  15,   0],
+       [ 16,  20,   3, 891,  31,   0,  47,   0,   4,   0],
+       [  0,   1, 115,  83, 687,   0,  70,   0,  16,   0],
+       [  0,   1,   0,   1,   0, 860,   2,  81,   9,  39],
+       [162,   4,  93,  76, 107,   0, 516,   0,  33,   0],
+       [  0,   0,   0,   0,   0,  60,   0, 865,   2,  70],
+       [  3,   2,   4,  27,  10,  14,   9,   5, 920,   2],
+       [  0,   1,   0,   0,   0,  23,   2,  66,   3, 882]]), &#39;test_acc&#39;: 0.8052})
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># explicitly require this experimental feature</span>
+<span class="kn">from</span> <span class="nn">sklearn.experimental</span> <span class="k">import</span> <span class="n">enable_hist_gradient_boosting</span>  <span class="c1"># noqa</span>
+<span class="c1"># now you can import normally from ensemble</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">HistGradientBoostingClassifier</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_single_feature_model</span><span class="p">(</span>
+    <span class="n">HogFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pixels_per_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">cells_per_block</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">sk_train</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">cm</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 7min 8s, sys: 2.2 s, total: 7min 11s
+Wall time: 3min 48s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TrainingOutput(model=Pipeline(memory=None,
+         steps=[(&#39;lambdarow&#39;,
+                 LambdaRow(row_func=HogFactory(orientations=8, pixels_per_cell=(4, 4), cells_per_block=(1, 1), multichannel=False))),
+                (&#39;histgradientboostingclassifier&#39;,
+                 HistGradientBoostingClassifier(l2_regularization=0.0,
+                                                learning_rate=0.1, loss=&#39;auto&#39;,
+                                                max_bins=256, max_depth=2,
+                                                max_iter=50, max_leaf_nodes=31,
+                                                min_samples_leaf=20,
+                                                n_iter_no_change=None,
+                                                random_state=None, scoring=None,
+                                                tol=1e-07,
+                                                validation_fraction=0.1,
+                                                verbose=0))],
+         verbose=False), metrics={&#39;train_cm&#39;: array([[4939,   32,  135,  339,   42,    3,  471,    1,   57,    0],
+       [   9, 5735,   14,  140,   21,    0,   35,    0,   10,    0],
+       [  53,    4, 4529,   54,  764,    0,  515,    1,   35,    0],
+       [  95,  151,   34, 5219,  201,    3,  266,    0,   18,    1],
+       [   7,    9,  545,  357, 4603,    1,  485,    0,   21,    0],
+       [   0,    0,    0,   12,    0, 5483,    3,  328,   50,  131],
+       [ 992,    9,  575,  289,  656,    0, 3404,    2,   82,    0],
+       [   0,    0,    0,    0,    0,  192,    0, 5393,   15,  403],
+       [  23,    4,   22,   90,   27,   67,  113,   10, 5643,    5],
+       [   0,    2,    0,   14,    2,  104,    4,  300,    7, 5590]]), &#39;train_acc&#39;: 0.8423, &#39;test_cm&#39;: array([[794,   8,  24,  59,   9,   0,  77,   0,  10,   0],
+       [  4, 986,   1,  29,   3,   0,  11,   0,   2,   0],
+       [ 12,   0, 793,  13, 131,   0,  93,   0,   3,   0],
+       [ 18,  19,   8, 885,  33,   1,  47,   0,   1,   0],
+       [  0,   1,  93,  58, 732,   0,  82,   0,   6,   0],
+       [  0,   0,   0,   1,   0, 895,   0,  64,  10,  23],
+       [184,   1,  93,  49, 103,   0, 546,   0,  15,   0],
+       [  0,   0,   0,   0,   0,  39,   0, 903,   5,  50],
+       [  3,   2,   3,  17,   6,   9,  26,   2, 925,   3],
+       [  0,   0,   0,   0,   1,  13,   0,  60,   1, 902]]), &#39;test_acc&#39;: 0.8361})
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">BaggingClassifier</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">_T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_single_feature_model</span><span class="p">(</span>
+    <span class="n">HogFactory</span><span class="p">(</span><span class="n">orientations</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pixels_per_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">cells_per_block</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">BaggingClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="n">_T</span><span class="p">,</span>
+        <span class="n">base_estimator</span><span class="o">=</span><span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">_T</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">sk_train</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">xtest</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">cm</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 15min 24s, sys: 6.47 s, total: 15min 30s
+Wall time: 6min
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TrainingOutput(model=Pipeline(memory=None,
+         steps=[(&#39;lambdarow&#39;,
+                 LambdaRow(row_func=HogFactory(orientations=8, pixels_per_cell=(4, 4), cells_per_block=(1, 1), multichannel=False))),
+                (&#39;baggingclassifier&#39;,
+                 BaggingClassifier(base_estimator=HistGradientBoostingClassifier(l2_regularization=0.0,
+                                                                                 learning_rate=0.1,
+                                                                                 loss=&#39;auto&#39;,
+                                                                                 max_bins=256,
+                                                                                 max_depth=2,
+                                                                                 max_iter=22,
+                                                                                 max_leaf_nodes=31,
+                                                                                 min_samples_leaf=20,
+                                                                                 n_iter_no_change=None,
+                                                                                 random_state=None,
+                                                                                 scoring=None,
+                                                                                 tol=1e-07,
+                                                                                 validation_fraction=0.1,
+                                                                                 verbose=0),
+                                   bootstrap=True, bootstrap_features=False,
+                                   max_features=1.0, max_samples=1.0,
+                                   n_estimators=22, n_jobs=None,
+                                   oob_score=False, random_state=None,
+                                   verbose=0, warm_start=False))],
+         verbose=False), metrics={&#39;train_cm&#39;: array([[4644,   40,  142,  549,   73,    1,  496,    3,   71,    0],
+       [  10, 5644,   13,  203,   25,    0,   56,    0,   13,    0],
+       [  54,    7, 4260,   78, 1009,    0,  499,    1,   47,    0],
+       [ 122,  185,   37, 5109,  229,    6,  269,    1,   27,    3],
+       [  16,    9,  750,  424, 4345,    0,  444,    0,   39,    1],
+       [   2,    0,    0,   14,    0, 5203,    1,  454,   94,  239],
+       [ 984,    6,  686,  406,  993,    3, 2812,    1,  116,    2],
+       [   0,    0,    0,    0,    0,  230,    0, 5187,   34,  552],
+       [  29,    4,   28,  162,   46,   79,  142,   14, 5483,   17],
+       [   0,    3,    3,   14,    3,  125,    2,  361,   13, 5499]]), &#39;train_acc&#39;: 0.8031, &#39;test_cm&#39;: array([[735,   9,  19, 104,  19,   1,  80,   0,  14,   0],
+       [  2, 971,   2,  43,   3,   0,  13,   0,   2,   0],
+       [ 15,   1, 735,  18, 180,   0,  89,   0,   6,   1],
+       [ 21,  25,  10, 864,  40,   1,  49,   0,   2,   0],
+       [  0,   1, 119,  67, 703,   0,  73,   0,   7,   2],
+       [  0,   0,   0,   1,   0, 843,   0,  89,  20,  40],
+       [171,   4, 104,  70, 152,   0, 463,   1,  25,   1],
+       [  0,   0,   0,   0,   0,  49,   0, 863,   9,  76],
+       [  8,   2,   3,  25,   7,  12,  27,   3, 902,   7],
+       [  0,   0,   1,   0,   0,  20,   0,  62,   1, 893]]), &#39;test_acc&#39;: 0.7972})
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
 </div>

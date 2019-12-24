@@ -1,0 +1,19 @@
+name: mlg-env
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.6.8
+  - click
+  - matplotlib
+  - numpy
+  - pytest
+  - python-dotenv
+  - scikit-image
+  - scipy
+  - opencv
+  - scikit-learn
+  - joblib
+  - pandas
+  - mlflow
+  - imgaug
+  - hyperopt

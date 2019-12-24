@@ -1,10 +1,10 @@
 ---
 
-title: Project name here
+title: mlg_lib
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Summary description here."
+summary: "Wrappers I used to try things "
 ---
 <!--
 
@@ -36,7 +36,23 @@ summary: "Summary description here."
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install your_project_name</code></p>
+<p>From pypy:</p>
+<p><code>pip install mlg_lib</code></p>
+<p>In dev mode:</p>
+
+<pre><code>git clone https://github.com/Matt3164/mlg_lib.git
+cd mlg_lib
+pip install -e .</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Main-idea">Main idea<a class="anchor-link" href="#Main-idea">&#182;</a></h2><p>The main idea here is to build image ML models with "simple" sklearn pipelines. Using simple ML pipelines to do machine learning on images is less and less done in profit of big DL models.</p>
+<p>In fact, I usually find handy to train a simple image feature model for at least two things : get a feel of the problem diificulty without the need of a GPU (I can often work on the problem modelisation before using a GPU...) and design the rest of the pipeline (data preprocessing, model deployment, GUI, debug statistics).</p>
+<p>The main requisites for this lib were not have too much dependencies except classical numerical python.</p>
+<p>It is still under heavy development, so API can change very quickly.</p>
 
 </div>
 </div>
@@ -49,7 +65,7 @@ summary: "Summary description here."
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Fill me in please! Don't forget code examples:</p>
+<p>TODO: Fill me in please! Don't forget code examples:</p>
 
 </div>
 </div>
