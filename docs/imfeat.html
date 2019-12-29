@@ -217,7 +217,7 @@ summary: "Utilities for computing image features."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ConvolutionFeature" class="doc_header"><code>class</code> <code>ConvolutionFeature</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L79" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ConvolutionFeature</code>(<strong><code>kernel</code></strong>:<code>ndarray</code>)</p>
+<h2 id="ConvolutionFeature" class="doc_header"><code>class</code> <code>ConvolutionFeature</code><a href="https://github.com/Matt3164/mlg_lib/tree/master/mlg_lib/imgfeat.py#L86" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ConvolutionFeature</code>(<strong><code>kernel</code></strong>:<code>ndarray</code>)</p>
 </blockquote>
 
 </div>
@@ -227,6 +227,13 @@ summary: "Utilities for computing image features."
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TODO: There seems to be a problem when kernel is over 512</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -243,7 +250,7 @@ summary: "Utilities for computing image features."
 <span class="n">im</span> <span class="o">=</span> <span class="n">chelsea</span><span class="p">()</span>
 <span class="n">gray</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
 
-<span class="n">kernel</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
 
 <span class="n">out</span> <span class="o">=</span> <span class="n">ConvolutionFeature</span><span class="p">(</span><span class="n">kernel</span><span class="p">)(</span><span class="n">gray</span><span class="p">)</span>
 
@@ -260,7 +267,7 @@ summary: "Utilities for computing image features."
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(30,)
+<pre>(3072,)
 </pre>
 </div>
 </div>

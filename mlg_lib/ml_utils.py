@@ -9,6 +9,7 @@ from typing import Callable
 import numpy as np
 from numpy.core._multiarray_umath import ndarray
 from sklearn.base import TransformerMixin, BaseEstimator
+from joblib import Parallel, delayed
 
 
 class LambdaRow(TransformerMixin, BaseEstimator):
@@ -21,17 +22,26 @@ class LambdaRow(TransformerMixin, BaseEstimator):
     def __init__(self,
                  row_func: Callable[[ndarray], ndarray],
                  to_features: bool = False,
+                 use_joblib: bool = False,
+                 n_jobs: int = 0,
                  **kwargs):
         """Constructor for LambdaRow"""
         self.func = row_func
         self.func_kwargs = kwargs
         self.to_features = to_features
+        self.use_joblib = use_joblib
+        self.n_jobs = n_jobs
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
-        _arr = np.array([self.func(x, **self.func_kwargs) for x in X])
+        if self.use_joblib:
+            val_list = Parallel(n_jobs=self.n_jobs)(delayed(self.func)(X[i,::], **self.func_kwargs) for i in range(X.shape[0]))
+            _arr = np.array(val_list)
+        else:
+            _arr = np.array([self.func(x, **self.func_kwargs) for x in X])
+
         if len(_arr.shape)>=2:
             if self.to_features:
                 N = _arr.shape[0]

@@ -15,7 +15,8 @@ index = {"say_hello": "00_core.ipynb",
          "DaisyFactory": "18_imfeat.ipynb",
          "flatten": "18_imfeat.ipynb",
          "LBPFactory": "18_imfeat.ipynb",
-         "ConvolutionFeature": "18_imfeat.ipynb"}
+         "ConvolutionFeature": "18_imfeat.ipynb",
+         "kernel": "18_imfeat.ipynb"}
 
 modules = ["core.py",
            "ml_utils.py",
