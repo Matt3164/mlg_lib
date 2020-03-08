@@ -126,13 +126,6 @@ Thumbs.db
 # pytest
 .pytest_cache
 
-# tools/trust-doc-nbs
-docs_src/.last_checked
-
-# symlinks to fastai
-docs_src/fastai
-tools/fastai
-
 # link checker
 checklink/cookies.txt
 
