@@ -43,23 +43,13 @@ It is still under heavy development, so API can change very quickly.
 ## How to use
 
 TODO: Fill me in please! Don't forget code examples:
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
 
-```python
-1+1
-```
+## TODOs
 
-</div>
-<div class="output_area" markdown="1">
-
-
-
-
-    2
-
-
-
-</div>
-
-</div>
+- [ ] Fix daisy on fmnist
+- [ ] Option to cache batches if no data augmentation
+- [ ] Compare to raw sklearn
+- [ ] Add PCA Transform API
+- [ ] Rocket example
+- [ ] Gabor features example
+- [ ] Unsupervised features training ( PCA + Andrez Ng)

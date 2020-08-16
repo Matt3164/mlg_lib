@@ -1,31 +1,38 @@
-from typing import Dict, Callable, Any
+from copy import deepcopy
+from typing import Callable, Any, List
 
+import numpy
 import numpy as np
 from sklearn.pipeline import Pipeline
 
+from mlg_lib.data.img_label_databunch import ImgLabelDatabunch
 from mlg_lib.ml.training_output import TrainingOutput
 
 
 def sk_train(
-    xtrain: np.ndarray,
-    xtest: np.ndarray,
-    ytrain: np.ndarray,
-    ytest: np.ndarray,
+    bunch: ImgLabelDatabunch,
     model: Pipeline,
-    metrics: Dict[str, Callable[[np.ndarray, np.ndarray], Any]]
-    )->TrainingOutput:
+    update_fn: Callable[[Pipeline, numpy.ndarray, numpy.ndarray], Pipeline],
+    metrics: List[Callable[[np.ndarray, np.ndarray], Any]]=list()
+    )->Callable[[int], TrainingOutput]:
 
-    model.fit(xtrain, ytrain)
+    def fit_fn(n_epochs: int)->TrainingOutput:
+        sk_model = deepcopy(model)
 
-    computed_metrics = dict()
+        for epoch in range(n_epochs):
+            for (x,y) in bunch.train_dl:
+                sk_model = update_fn(sk_model, x, y)
 
-    for tag, (x,y) in [("train", (xtrain, ytrain) ), ("test", (xtest, ytest))]:
-        predictions = model.predict(x)
+        computed_metrics = dict()
 
-        for metric_tag, metric_fn in metrics:
-            computed_metrics["_".join([tag, metric_tag])] = metric_fn(y, predictions)
+        for metric_fn in metrics:
+            for tag, dl in [("train", bunch.train_dl ), ("test", bunch.valid_dl)]:
+                batch_metrics = [metric_fn(y, sk_model.predict(x)) for x,y in dl]
 
-    return TrainingOutput(
-        model=model,
-        metrics=computed_metrics
-    )
+                computed_metrics["_".join([tag, metric_fn.__name__])] = numpy.mean(batch_metrics)
+
+        return TrainingOutput(
+            models=sk_model,
+            metrics=computed_metrics
+        )
+    return fit_fn

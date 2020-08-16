@@ -1,11 +1,10 @@
-from typing import Dict, Any
+from dataclasses import dataclass
+from typing import Dict, Any, List
 
-import attr
 from sklearn.pipeline import Pipeline
 
 
-@attr.s
+@dataclass
 class TrainingOutput(object):
-
-    model = attr.ib(type=Pipeline)
-    metrics = attr.ib(type=Dict[str, Any])
+    models: List[Pipeline]
+    metrics : Dict[str, Any]
