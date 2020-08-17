@@ -31,6 +31,7 @@ if __name__ == '__main__':
         pca = PCA(n_components=n**2, whiten=True)
         pca.fit(x)
 
+        pyplot.figure()
         for i in range(n**2):
             pyplot.subplot(n,n,i+1)
             pyplot.imshow(pca.components_[i,:].reshape(28,28))

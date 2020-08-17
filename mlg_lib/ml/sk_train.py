@@ -4,6 +4,7 @@ from typing import Callable, Any, List
 import numpy
 import numpy as np
 from sklearn.pipeline import Pipeline
+from tqdm import tqdm
 
 from mlg_lib.data.img_label_databunch import ImgLabelDatabunch
 from mlg_lib.ml.training_output import TrainingOutput
@@ -19,7 +20,7 @@ def sk_train(
     def fit_fn(n_epochs: int)->TrainingOutput:
         sk_model = deepcopy(model)
 
-        for epoch in range(n_epochs):
+        for epoch in tqdm(range(n_epochs), desc="Epochs"):
             for (x,y) in bunch.train_dl:
                 sk_model = update_fn(sk_model, x, y)
 

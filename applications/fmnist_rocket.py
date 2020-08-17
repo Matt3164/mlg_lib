@@ -1,12 +1,12 @@
 import numpy
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
 
 from mlg_lib.data.img_label_databunch import ImgLabelDatabunch
 from mlg_lib.ml.ensemble_update import ensemble_update
 from mlg_lib.ml.sk_train import sk_train
-from mlg_lib.transforms.daisy import wrapped_daisy
+from mlg_lib.transforms.convolution import convolution
+from mlg_lib.transforms.flatten import flatten
 
 if __name__ == '__main__':
     DATA_PATH = "/home/matthieu/Workspace/data/fashion_mnist.npz"
@@ -16,30 +16,21 @@ if __name__ == '__main__':
 
     data = numpy.load(DATA_PATH)
 
-    xtrain = data["xtrain"]
-    ytrain = data["ytrain"]
-    xtest = data["xtest"]
-    ytest = data["ytest"]
-
-    xtrain, _, ytrain, _ = train_test_split(xtrain, ytrain, train_size=0.1)
-    xtest, _, ytest, _ = train_test_split(xtest, ytest, train_size=0.1)
-
-    print(f"Train {xtrain.shape}")
-    print(f"Test {xtest.shape}")
+    kernel = 0.2 * numpy.random.randn(3, 3, 256)
 
     bunch = ImgLabelDatabunch.from_arrays(
-        ((xtrain, ytrain), (xtest, ytest)),
-        img_transform=wrapped_daisy(),
+        ((data["xtrain"], data["ytrain"]), (data["xtest"], data["ytest"])),
+        img_transform=convolution(kernel),
         names=LABEL_NAMES,
-        batch_size=int(xtrain.shape[0] / 4)
+        batch_size=int(data["xtrain"].shape[0] / 5)
     )
 
     # fit
 
     training_output = sk_train(
         bunch,
-        RandomForestClassifier(n_estimators=1, max_depth=None, max_features="log2"),
-        update_fn=ensemble_update(25),
+        RandomForestClassifier(n_estimators=1, max_depth=3, max_features="log2"),
+        update_fn=ensemble_update(10),
         metrics=[metrics.accuracy_score])(1)
 
     print(training_output)

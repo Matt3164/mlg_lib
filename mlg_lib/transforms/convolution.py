@@ -20,3 +20,7 @@ class ConvolutionFeature(object):
                 list,
                 np.array
             )
+
+
+def convolution(k: np.ndarray)->ConvolutionFeature:
+    return ConvolutionFeature(kernel=k)
