@@ -14,7 +14,7 @@ def learner(
         metrics: Dict[str,BufferMetric]
 ) -> Callable[[], TrainingOutput]:
     def fit_fn() -> TrainingOutput:
-        model.fit(bunch.train.x, bunch.train.y)
+        model.fit(bunch.train.x, bunch.train.y.ravel())
 
         to_pred_ctx_fn = to_prediction_ctx_fn(model)
 

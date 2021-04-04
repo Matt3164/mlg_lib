@@ -6,6 +6,9 @@ from sklearn.datasets import fetch_openml
 from common import memory
 
 
+label_names = ["top", "trouser", "pullover", "dress", "coat",
+	"sandal", "shirt", "sneaker", "bag", "ankle boot"]
+
 @memory.cache
 def get_fmnist() -> Tuple[ndarray, ndarray]:
     data = fetch_openml("Fashion-MNIST", data_home="/home/matthieu/sklearn_data")

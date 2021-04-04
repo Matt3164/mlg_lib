@@ -1,26 +1,3 @@
-from typing import Callable, Union
-
-from sklearn.model_selection import train_test_split
-
-from mlutils.data.numpy_dataset import NumpyDataset, NumpyDatabunch
-
-
-def make_splitter(
-        train_size: Union[float, int, None] = 0.8, test_size: Union[float, int, None] = None, random_state: int = 13) -> \
-Callable[[NumpyDataset], NumpyDatabunch]:
-    def split_fn(dataset: NumpyDataset) -> NumpyDatabunch:
-        xtrain, xtest, ytrain, ytest = train_test_split(dataset.x, dataset.y,
-                                                        train_size=train_size,
-                                                        test_size=test_size,
-                                                        random_state=random_state)
-
-        return NumpyDatabunch(
-            train=NumpyDataset.from_arrays(xtrain, ytrain),
-            test=NumpyDataset.from_arrays(xtest, ytest)
-        )
-
-    return split_fn
-
 # def to_iterator(dataset: Dataset) -> Iterator[Tuple[ndarray, ndarray]]:
 #     for i in range(dataset.x.shape[0]):
 #         yield dataset.x[i, ::], dataset.y[i, :]

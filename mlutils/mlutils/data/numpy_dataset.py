@@ -1,11 +1,13 @@
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Tuple
 
+import numpy as np
 from numpy.core.multiarray import ndarray
 
 from mlutils import np_utils
-import numpy as np
+
 
 @dataclass
 class NumpyDataset(object):
@@ -45,3 +47,22 @@ class NumpyDatabunch:
     train: NumpyDataset = None
     test: NumpyDataset = None
     valid: NumpyDataset = None
+
+    @staticmethod
+    def from_file(filepath: str):
+        return NumpyDatabunch(
+            train=NumpyDataset.from_file(filepath.format("train")),
+            test=NumpyDataset.from_file(filepath.format("test")),
+            valid=NumpyDataset.from_file(filepath.format("valid")) if os.path.exists(filepath.format("valid")) else None,
+        )
+
+    def to_file(self, filepath: str):
+        for dataset, fold in [(self.train, "train"), (self.test, "test"), (self.valid, "valid")]:
+            if dataset:
+                dataset.to_file(filepath.format(fold))
+
+    @staticmethod
+    def exists(filepath):
+        return os.path.exists(filepath.format("train")) and os.path.exists(filepath.format("test"))
+
+

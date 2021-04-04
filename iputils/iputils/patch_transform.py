@@ -17,7 +17,6 @@ class PatchTransform(TransformerMixin, BaseEstimator):
         self.max_patches = max_patches
         self.stride = stride
 
-
     def fit(self, X, y=None):
         extractor = PatchExtractor(patch_size=(self.patch_size, self.patch_size), max_patches=self.max_patches)
 
@@ -59,6 +58,6 @@ class PatchTransform(TransformerMixin, BaseEstimator):
 
         for key in params.keys():
             if "transformer" in key:
-                new_kwargs[key[len("transformer__"):]]=params[key]
+                new_kwargs[key[len("transformer__"):]] = params[key]
 
         return self.transformer.set_params(**new_kwargs)
