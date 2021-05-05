@@ -1,0 +1,7 @@
+import numpy
+
+MAX_ITEMS = 256
+SCALES = numpy.arange(0.1, 0.9, 0.1)
+IOU_THRESHOLD = 0.5
+MAX_NEGATIVES_BY_ITEM = 100
+MIN_CONFIDENCE = 0.7

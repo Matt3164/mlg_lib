@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import numpy
+from tqdm import tqdm
 
 from mlutils.data.dataset import Dataset
 from mlutils.data.numpy_dataset import NumpyDataset
@@ -35,7 +36,7 @@ class Dataloader(object):
 
     def stack_one_epoch(self) -> NumpyDataset:
         samples = list([self.dataset[_] for _ in
-                        range(len(self.dataset))])
+                        tqdm(range(len(self.dataset)))])
         return NumpyDataset(
             x=numpy.asarray(list(map(lambda _: _.x, samples))),
             y=numpy.asarray(list(map(lambda _: _.y, samples))))

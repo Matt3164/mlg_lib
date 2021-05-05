@@ -1,3 +1,0 @@
-N_ITER = 20
-OPTIMIZED = "fbeta"
-N_JOBS = 4

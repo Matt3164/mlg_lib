@@ -3,33 +3,27 @@ from typing import List, Union
 
 import numpy
 
+from iputils.data.tensor_list import _TensorList
+from iputils.data.tensor_list_factory import TensorList
+
 
 @dataclass
-class _LabelList(object):
+class LabelList(_TensorList):
+    tensor_list: _TensorList
     names: Union[None, List[str]] = None
 
-    def __getitem__(self, item: int) -> numpy.ndarray:
-        raise NotImplementedError
+    def __getitem__(self, item) -> numpy.ndarray:
+        return self.tensor_list[item]
 
     def __len__(self) -> int:
-        raise NotImplementedError
+        return len(self.tensor_list)
 
+    def get_name(self, item: int) -> str:
+        return self.names[self.tensor_list[item]]
 
-@dataclass
-class LabelArray(_LabelList):
-    arr: numpy.ndarray = numpy.empty((0,))
-
-    def __getitem__(self, item: int) -> numpy.ndarray:
-        return self.arr[[item]]
-
-    def __len__(self) -> int:
-        return self.arr.shape[0]
-
-
-class LabelList(_LabelList):
     @staticmethod
     def from_array(
             arr: numpy.ndarray,
             names: List[str] = None
-    ) -> LabelArray:
-        return LabelArray(arr=arr, names=names)
+        ) -> 'LabelList':
+        return LabelList(tensor_list=TensorList.from_array(arr=arr), names=names)

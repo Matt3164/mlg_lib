@@ -18,6 +18,5 @@ class OpenCVHelpers(object):
             cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
         )
 
-
 from_path = OpenCVHelpers.imread
 to_path = OpenCVHelpers.imwrite
